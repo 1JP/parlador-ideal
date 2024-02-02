@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'only' => [],
+    'only' => [
+        'users.*',
+    ],
 ];
