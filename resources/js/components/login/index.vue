@@ -1,12 +1,12 @@
 <template>
     <div class="form-group">
-        <input-container-component titulo="E-mail" id="novoEmail" id-help="novoEmailHelp" texto-ajuda="Informe o E-mail">
-            <input type="text" class="form-control" id="novoEmail" aria-describedby="novoEmailHelp" placeholder="E-mail">
+        <input-container-component title="E-mail" id="novoEmail" id-help="novoEmailHelp" text-help="Informe o E-mail">
+            <input type="email" class="form-control" id="novoEmail" aria-describedby="novoEmailHelp" placeholder="E-mail">
         </input-container-component>
     </div>
     <div class="form-group">
-        <input-container-component titulo="Senha" id="novoSenha" id-help="novoSenhaHelp" texto-ajuda="Informe o senha">
-            <input type="text" class="form-control" id="novoSenha" aria-describedby="novoSenhaHelp" placeholder="senha">
+        <input-container-component title="Senha" id="novoSenha" id-help="novoSenhaHelp" text-help="Informe o senha">
+            <input type="password" class="form-control" id="novoSenha" aria-describedby="novoSenhaHelp" placeholder="senha">
         </input-container-component>
     </div>
     <div class="text-center">

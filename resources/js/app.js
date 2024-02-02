@@ -15,8 +15,12 @@ import { createApp } from 'vue';
 
 const app = createApp();
 
-app.component('login-component', require('./components/login/index.vue').default);
+app.component('input-container-component', require('./components/InputContainer.vue').default);
 app.component('alert-component', require('./components/Alert.vue').default);
+
+app.component('login-component', require('./components/login/index.vue').default);
+app.component('user-create', require('./components/users/create.vue').default);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
