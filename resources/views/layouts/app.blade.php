@@ -1,9 +1,8 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -13,69 +12,41 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     @routes
-
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-info">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+        <header>
+            <div class="py-2 border-bottom border-light">
+              <div class="container">
+                <div class="row d-flex align-items-center justify-content-start">
+                  <div class="col-lg-3 col-12 d-flex justify-content-center logo">
+                    <a href="index.html"><img class="desktop" src="img/logo/logo-com-assinatura.svg"></a>
+                    <a href="index.html"><img class="mobile" src="img/logo/logo-sem-assinatura.svg"></a>
+                  </div>
+                  <div class="col-12 col-sm-12 d-none d-lg-block d-xl-block col-lg-3"></div>
+                  <div class="col-12 col-lg-3"></div>
+                  <div class="d-flex align-items-center px-0 col-12 col-lg-3">
+                    <div class="mr-2 d-none d-lg-block d-xl-block">
+                      <a class="text-dark" href="{{ route('login') }}">Login </a>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </nav>
-
+            <!-- Menu all categorias - end -->
+            <!-- Menu mobile - end -->
+            <!-- Menu all categorias overlay - start -->
+            <div class="zeynep-overlay"></div>
+            <!-- Menu all categorias overlay - end -->
+        </header>
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+
+    @include('layouts.partials.scripts')
 </body>
 </html>
