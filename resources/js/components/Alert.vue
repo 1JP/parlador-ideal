@@ -1,21 +1,21 @@
 <template>
-    <div :class="estilo" role="alert">
-        {{titulo}}
+    <div :class="style" role="alert">
+        {{title}}
         <hr>
-        <p>{{ detalhes.mensagem }}</p>
+        <p>{{ details.message }}</p>
         <br>
-        <ul v-if="detalhes.dados">
-            <li v-for="e, key in detalhes.dados" :key="key">{{ e[0] }}</li>
+        <ul v-if="details.data">
+            <li v-for="e, key in details.data" :key="key">{{ e[0] }}</li>
         </ul>
     </div>
 </template>
 
 <script>
     export default { 
-        props: ['tipo', 'titulo', 'detalhes'],
+        props: ['type', 'title', 'details'],
         computed: {
-            estilo() {
-                return 'alert alert-'+this.tipo
+            style() {
+                return 'alert alert-'+this.type;
             }
         }
     }

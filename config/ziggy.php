@@ -3,5 +3,6 @@
 return [
     'only' => [
         'users.*',
+        'api.users.*',
     ],
 ];
