@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                        <alert-component tipo="danger" :detalhes="[]" titulo="Erro ao tentar cadastrar a marca" v-if="false"></alert-component>
+                        <alert-component type="danger" :details="[]" title="Erro ao tentar cadastrar a marca" v-if="false"></alert-component>
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-start">
                                 <h4 class="font-weight-bolder">Login</h4>
@@ -14,6 +14,12 @@
                             </div>
                             <div class="card-body">
                                 <login-component/>
+                            </div>
+                            <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                <p class="mb-4 text-sm mx-auto">
+                                    Não tenho uma conta?
+                                    <a href="{{ route('users.create') }}" class="text-primary text-gradient font-weight-bold">Inscrever-se</a>
+                                </p>
                             </div>
                         </div>
                     </div>
