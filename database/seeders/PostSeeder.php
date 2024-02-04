@@ -6,19 +6,19 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class PostSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'João Pedro',
-            'email' => 'joaopedrogs1@outlook.com',
-            'password' => bcrypt('McPt.95!'),
-        ]);
+        $users = User::all();
 
-        User::factory(5)->create();
+        foreach ($users as $user) {
+            $user->posts()->create([
+                'post' => fake()->text()
+            ]);
+        }
     }
 }
