@@ -35,7 +35,7 @@ class PostRequest extends FormRequest
     {
         return [
             'post.required' => 'O campo post é obrigatório.',
-            'post.max' => 'O post precisa ter no maxímo 8 caracteres',
+            'post.max' => 'O post precisa ter no maxímo 280 caracteres',
         ];
     }
 }

@@ -1,6 +1,6 @@
 <template>
-    
     <div class="col-md-8">
+        <alert-component type="success d-flex align-items-center" :details="details" :title="title" v-if="statusSuccess"></alert-component>
         <div class="card mb-3" v-for="post in posts" :key="post.id">
             <div class="card-header bg-dark py-2 text-white">
                 <div class="d-flex">
@@ -67,7 +67,7 @@
                 <div class="col-10"></div>
 
                 <div class="col">
-                    <button type="button" class="btn btn-primary float-right" @click="update()">Adicionar</button>
+                    <button type="button" class="btn btn-primary float-right" @click="update()">Editar</button>
                 </div>
             </div>
         </template>
@@ -95,8 +95,12 @@
                 number: 280,
                 max: 280,
                 status: false,
+                statusSuccess: false,
+                close: false,
                 posts: {},
+                details: {},
                 postId: '',
+                title: 'Post cadastrado com sucesso',
             }
         },
         methods: {
@@ -122,6 +126,9 @@
                     .then(response => {
                         vm.status = false;
                         this.listPosts();
+                        this.closeModal();
+                        vm.post = '';
+                        vm.title = 'Post cadastrado com sucesso';
                     })
                     .catch(errors => {
                         vm.status = true;
@@ -148,6 +155,8 @@
                     .then(response => {
                         vm.status = false;
                         this.listPosts();
+                        this.statusSuccess = true;
+                        vm.title = 'Post atualizado com sucesso';
                     })
                     .catch(errors => {
                         vm.status = true;
@@ -169,6 +178,8 @@
                     .then(response => {
                         vm.status = false;
                         this.listPosts();
+                        this.closeModal();
+                        vm.title = 'Post excluido com sucesso';
                     })
                     .catch(errors => {
                         vm.status = true;
