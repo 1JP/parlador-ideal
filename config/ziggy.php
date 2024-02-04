@@ -6,5 +6,6 @@ return [
         'login',
         'home',
         'api.users.*',
+        'api.posts.*',
     ],
 ];

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-      <post-component/>
+      <post-component :user="{{ Auth::user() }}"/>
     </div>
     <div class="bg-info fixed-bottom shadow-lg border-top">
         <div class="container d-flex justify-content-center">
