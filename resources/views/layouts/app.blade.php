@@ -11,6 +11,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" type="text/css">
     @routes
     
     <!-- Styles -->
@@ -21,7 +22,9 @@
         @if (Route::currentRouteName() != 'login')
             <nav class="py-2 border-bottom border-light">
                 <div class="d-flex">
-                    <div class="p-2 w-100"></div>
+                    <div class="p-2 w-100">
+                        <h3>Parlador Ideal</h3>
+                    </div>
                     <div class="p-2 flex-shrink-1">
                         @if (Auth::user())
                             <form method="POST" action="{{ route('logout') }}">
@@ -38,7 +41,6 @@
                 </div>
             </nav>
         @endif
-      
         <main class="py-4">
             @yield('content')
         </main>
