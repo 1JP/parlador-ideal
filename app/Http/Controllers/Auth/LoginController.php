@@ -47,7 +47,7 @@ class LoginController extends Controller
     {
         // Custom message for invalid password
         throw ValidationException::withMessages([
-            'Senha inválida. Certifique-se de inserir a senha correta.',
+            'email' => ['As credenciais fornecidas estão incorretas.'],
         ]);
     }
 
