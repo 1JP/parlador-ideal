@@ -1,8 +1,8 @@
-# O Mentor - Meteora Digital
+# O Parlador Ideal
 
-## About O Mentor
+## About O Parlador Ideal
 
-O mentor is a web application for _Meteora Digial_ to shared courses with their clients.
+O Parlador Ideal is a web application for _Parlador Ideal_ facilitate the exchange of libertarian ideas.
 
 ## Configuring your enviroment
 
