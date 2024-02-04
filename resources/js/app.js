@@ -17,10 +17,13 @@ const app = createApp();
 
 app.component('input-container-component', require('./components/InputContainer.vue').default);
 app.component('alert-component', require('./components/Alert.vue').default);
+app.component('info-logo-component', require('./components/InfoLogo.vue').default);
+app.component('dropdown-component', require('./components/Dropdown.vue').default);
+app.component('modal-component', require('./components/Modal.vue').default);
 
 app.component('login-component', require('./components/login/index.vue').default);
 app.component('user-create', require('./components/users/create.vue').default);
-
+app.component('post-component', require('./components/post/index.vue').default);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
