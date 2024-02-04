@@ -37,7 +37,9 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        //
+        $post->update($request->validated());
+
+        return response()->json(PostResource::make($post), 200);
     }
 
     /**
@@ -45,6 +47,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return response()->json([], 200);
     }
 }

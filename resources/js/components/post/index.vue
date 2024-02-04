@@ -13,8 +13,8 @@
                                 <i class="bi bi-three-dots-vertical"></i>
                             </template>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item text-light border-bottom bg-dark" href="#" data-bs-target="#" data-bs-toggle="modal"><i class="bi bi-pencil mr-2"></i>Editar</a></li>
-                                <li><a class="dropdown-item text-light border-bottom bg-dark" href="#" data-bs-target="#remover-ciclo" data-bs-toggle="modal"><i class="bi bi-trash3 mr-2"></i>Remover</a></li>
+                                <li><a class="dropdown-item text-light border-bottom bg-dark" href="#" data-bs-target="#modalEditPost" data-bs-toggle="modal" @click="edit(post)"><i class="bi bi-pencil mr-2"></i>Editar</a></li>
+                                <li><a class="dropdown-item text-light border-bottom bg-dark" href="#" data-bs-target="#modalRemovePost" data-bs-toggle="modal" @click="remove(post)"><i class="bi bi-trash3 mr-2"></i>Remover</a></li>
                             </ul>
                         </dropdown-component>
                     </div>
@@ -52,6 +52,36 @@
         </template>
     </modal-component>
 
+    <modal-component id="modalEditPost" title="Editar Post">
+        <template v-slot:alert>
+            <alert-component type="danger" :details="details" title="Erro ao cadastrar o post" v-if="status"></alert-component>
+        </template>
+
+        <template v-slot:body>
+            <input-container-component title="Post" id="novoPost" id-help="novoPostHelp" :textHelp="number+' caracteres'">
+                <textarea class="form-control" v-model="post" cols="30" rows="10" maxlength="280" @input="handleInput"></textarea>
+            </input-container-component>
+        </template>
+        <template v-slot:footer>
+            <div class="row">
+                <div class="col-10"></div>
+
+                <div class="col">
+                    <button type="button" class="btn btn-primary float-right" @click="update()">Adicionar</button>
+                </div>
+            </div>
+        </template>
+    </modal-component>
+
+    <modal-component id="modalRemovePost" title="Deletar Post">
+        <template v-slot:body>
+            Deseja excluir esse post?
+        </template>
+        <template v-slot:footer>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-danger" @click="destroy()">Remover</button>
+        </template>
+    </modal-component>
 </template>
 
 <script>
@@ -66,6 +96,7 @@
                 max: 280,
                 status: false,
                 posts: {},
+                postId: '',
             }
         },
         methods: {
@@ -99,6 +130,54 @@
                         }
                     });
             },
+
+            edit(data){
+                this.post = data.post;
+                this.postId = data.id;
+            },
+
+            update(){
+                let vm = this;
+                let data = {};
+
+                data = {
+                    post : vm.post,
+                };
+                
+                axios.put(route('api.posts.update', vm.postId), data)
+                    .then(response => {
+                        vm.status = false;
+                        this.listPosts();
+                    })
+                    .catch(errors => {
+                        vm.status = true;
+                        vm.details = {
+                            data: errors.response.data.errors
+                        }
+                    });
+            },
+
+            remove(data){
+                this.postId = data.id;
+            },
+
+            destroy()
+            {
+                let vm = this;
+
+                axios.delete(route('api.posts.destroy', vm.postId))
+                    .then(response => {
+                        vm.status = false;
+                        this.listPosts();
+                    })
+                    .catch(errors => {
+                        vm.status = true;
+                        vm.details = {
+                            data: errors.response.data.errors
+                        }
+                    });
+            },
+
             handleInput() {
                 this.number = this.number + (this.post.length > this.number ? 1 : -1);
                 if (this.post.length == 0) {
