@@ -43,11 +43,7 @@
         </template>
         <template v-slot:footer>
             <div class="row">
-                <div class="col-10"></div>
-
-                <div class="col">
-                    <button type="button" class="btn btn-primary float-right" @click="save()">Adicionar</button>
-                </div>
+                <button type="button" class="btn btn-primary float-right" @click="save()">Adicionar</button>
             </div>
         </template>
     </modal-component>
@@ -64,11 +60,7 @@
         </template>
         <template v-slot:footer>
             <div class="row">
-                <div class="col-10"></div>
-
-                <div class="col">
-                    <button type="button" class="btn btn-primary float-right" @click="update()">Editar</button>
-                </div>
+                <button type="button" class="btn btn-primary float-right" @click="update()">Editar</button>
             </div>
         </template>
     </Modal>
@@ -129,14 +121,15 @@
                 axios.post(route('api.posts.store'), data)
                     .then(response => {
                         this.listPosts();
+                        vm.status = false;
                         this.statusSuccess = true;
                         vm.post = '';
+                        vm.number = 280;
                         vm.title = 'Post cadastrado com sucesso';
                         $("#modalNewPost").modal('hide');
                     })
                     .catch(errors => {
                         vm.status = true;
-                        console.log(errors);
                         vm.details = {
                             data: errors.response.data.errors
                         }
@@ -165,6 +158,7 @@
                         vm.statusSuccess = true;
                         vm.title = 'Post atualizado com sucesso';
                         vm.post = '';
+                        vm.number = 280;
                         $("#modalEditPost").modal('hide');
                     })
                     .catch(errors => {
