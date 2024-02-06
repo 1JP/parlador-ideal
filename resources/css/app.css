@@ -5735,13 +5735,13 @@ fieldset:disabled .btn {
 }
 
 .alert-danger {
-  --bs-alert-color: #842029;
+  --bs-alert-color: #f8d7da;
   --bs-alert-bg: #f8d7da;
   --bs-alert-border-color: #f5c2c7;
 }
 
 .alert-danger .alert-link {
-  color: #761a2c;
+  color: #f8d7da;
 }
 
 .alert-light {
@@ -20118,7 +20118,7 @@ fieldset:disabled .btn {
 }
 
 .alert-danger {
-  background-image: linear-gradient(310deg, #f5365c 0%, #f3410f 100%);
+  background-image: linear-gradient(310deg, #f8d7da 0%, #f8d7da 100%);
 }
 
 .alert-light {
