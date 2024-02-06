@@ -24,7 +24,7 @@ class LoginControllerTest extends TestCase
         $this->post(route('login'), [
             'email' => 'john.doe@email.com',
             'password' => '12345678',
-        ])->assertFound()->assertRedirect(route('home'));
+        ])->assertFound()->assertRedirect(route('posts.index'));
 
         $this->assertAuthenticated();
     }
