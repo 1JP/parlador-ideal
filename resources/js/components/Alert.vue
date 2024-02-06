@@ -15,7 +15,20 @@
 
 <script>
     export default { 
-        props: ['type', 'title', 'details'],
+        props: {
+            type: {
+                type: String,
+                required: true,
+            }, 
+            title: {
+                type: String,
+                required: true,
+            },
+            details: {
+                type: Object,
+                required: true,
+            }
+        },
 
         computed: {
             style() {
