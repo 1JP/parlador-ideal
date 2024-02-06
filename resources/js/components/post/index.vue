@@ -96,7 +96,6 @@
                 max: 280,
                 status: false,
                 statusSuccess: false,
-                close: false,
                 posts: {},
                 details: {},
                 postId: '',
@@ -124,14 +123,15 @@
                 
                 axios.post(route('api.posts.store'), data)
                     .then(response => {
-                        vm.status = false;
                         this.listPosts();
-                        this.closeModal();
+                        this.statusSuccess = true;
                         vm.post = '';
                         vm.title = 'Post cadastrado com sucesso';
+                        $("#modalNewPost").modal('hide');
                     })
                     .catch(errors => {
                         vm.status = true;
+                        console.log(errors);
                         vm.details = {
                             data: errors.response.data.errors
                         }
@@ -139,8 +139,10 @@
             },
 
             edit(data){
+                this.status = false;
                 this.post = data.post;
                 this.postId = data.id;
+                this.handleInput();
             },
 
             update(){
@@ -155,8 +157,10 @@
                     .then(response => {
                         vm.status = false;
                         this.listPosts();
-                        this.statusSuccess = true;
+                        vm.statusSuccess = true;
                         vm.title = 'Post atualizado com sucesso';
+                        vm.post = '';
+                        $("#modalEditPost").modal('hide');
                     })
                     .catch(errors => {
                         vm.status = true;
@@ -178,8 +182,9 @@
                     .then(response => {
                         vm.status = false;
                         this.listPosts();
-                        this.closeModal();
+                        vm.statusSuccess = true;
                         vm.title = 'Post excluido com sucesso';
+                        $("#modalRemovePost").modal('hide');
                     })
                     .catch(errors => {
                         vm.status = true;
@@ -190,7 +195,9 @@
             },
 
             handleInput() {
-                this.number = this.number + (this.post.length > this.number ? 1 : -1);
+                let length = this.post.length > 0 ? this.post.length : 1;
+
+                this.number = this.number + (this.post.length > this.number ? 1 : -length);
                 if (this.post.length == 0) {
                     this.number = this.max;
                 }
