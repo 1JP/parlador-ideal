@@ -52,7 +52,7 @@
         </template>
     </modal-component>
 
-    <modal-component id="modalEditPost" title="Editar Post">
+    <Modal id="modalEditPost" title="Editar Post" @onClose="closeModal">
         <template v-slot:alert>
             <alert-component type="danger" :details="details" title="Erro ao cadastrar o post" v-if="status"></alert-component>
         </template>
@@ -71,7 +71,7 @@
                 </div>
             </div>
         </template>
-    </modal-component>
+    </Modal>
 
     <modal-component id="modalRemovePost" title="Deletar Post">
         <template v-slot:body>
@@ -85,10 +85,15 @@
 </template>
 
 <script>
+    import Modal from '../Modal.vue';
+
     export default {
         props: [
             'user'
         ],
+        components: {
+            Modal
+        },
         data(){
             return {
                 post: '',
@@ -174,8 +179,7 @@
                 this.postId = data.id;
             },
 
-            destroy()
-            {
+            destroy(){
                 let vm = this;
 
                 axios.delete(route('api.posts.destroy', vm.postId))
@@ -205,6 +209,10 @@
                 if (this.post.length == this.max) {
                     this.number = 0;
                 }
+            },
+
+            closeModal(){
+                this.post = '';
             }
         },
         mounted() {

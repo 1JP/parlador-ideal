@@ -9,7 +9,8 @@
         <div class="container d-flex justify-content-center">
           <div class="row">
             <div class="px-0">
-              <a class="btn btn-primary d-inline-flex align-items-center mt-1" data-bs-target="#modalNewPost" data-bs-toggle="modal" href="#">
+              <a class="btn btn-primary d-inline-flex align-items-center mt-1" 
+                data-bs-target="#modalNewPost" data-bs-toggle="modal" href="#">
                 <span>Novo Post</span>
               </a>
             </div>

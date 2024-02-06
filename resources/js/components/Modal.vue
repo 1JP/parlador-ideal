@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLabel">{{ title }}</h5>
-                    <button type="button" class="close btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" @click="close" class="close btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -23,6 +23,7 @@
 
 <script>
     export default {
+        name: "Modal",
         props: {
             id: {
                 type: String,
@@ -33,5 +34,12 @@
                 required: true,
             },
         },
+        emits: ["onClose"],
+        methods: {
+            close(event) {
+                if (event.target.attributes["aria-hidden"])
+                    this.$emit("onClose", true);
+            },
+        }
     }
 </script>
