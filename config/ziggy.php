@@ -5,6 +5,7 @@ return [
         'users.*',
         'login',
         'home',
+        'posts.*',
         'api.users.*',
         'api.posts.*',
     ],

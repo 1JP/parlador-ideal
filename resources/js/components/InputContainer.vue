@@ -9,6 +9,22 @@
 
 <script>
     export default {
-        props: ['id', 'title', 'idHelp', 'textHelp']
+        props: {
+            id: {
+                type: String,
+                required: true,
+            }, 
+            title: {
+                type: String,
+                required: true,
+            },
+            idHelp: {
+                type: String,
+                required: true,
+            }, 
+            textHelp: {
+                type: String,
+            },
+        }
     }
 </script>
