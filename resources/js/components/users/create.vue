@@ -61,7 +61,7 @@
                 axios.post(route('api.users.store'), data)
                     .then(response => {
                         vm.status = false;
-                        location.href = route('home');
+                        location.href = route('posts.index');
                     })
                     .catch(errors => {
                         vm.status = true;

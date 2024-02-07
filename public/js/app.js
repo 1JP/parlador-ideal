@@ -21641,13 +21641,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(route('api.posts.store'), data).then(function (response) {
         _this2.listPosts();
         vm.status = false;
-        _this2.statusSuccess = true;
+        vm.statusSuccess = true;
+        vm.details = {};
         vm.post = '';
         vm.number = 280;
         vm.title = 'Post cadastrado com sucesso';
         $("#modalNewPost").modal('hide');
       })["catch"](function (errors) {
         vm.status = true;
+        vm.statusSuccess = false;
         vm.details = {
           data: errors.response.data.errors
         };
@@ -21670,12 +21672,14 @@ __webpack_require__.r(__webpack_exports__);
         vm.status = false;
         _this3.listPosts();
         vm.statusSuccess = true;
+        vm.details = {};
         vm.title = 'Post atualizado com sucesso';
         vm.post = '';
         vm.number = 280;
         $("#modalEditPost").modal('hide');
       })["catch"](function (errors) {
         vm.status = true;
+        vm.statusSuccess = false;
         vm.details = {
           data: errors.response.data.errors
         };
@@ -21691,10 +21695,12 @@ __webpack_require__.r(__webpack_exports__);
         vm.status = false;
         _this4.listPosts();
         vm.statusSuccess = true;
+        vm.details = {};
         vm.title = 'Post excluido com sucesso';
         $("#modalRemovePost").modal('hide');
       })["catch"](function (errors) {
         vm.status = true;
+        vm.statusSuccess = false;
         vm.details = {
           data: errors.response.data.errors
         };
@@ -21761,7 +21767,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post(route('api.users.store'), data).then(function (response) {
         vm.status = false;
-        location.href = route('home');
+        location.href = route('posts.index');
       })["catch"](function (errors) {
         vm.status = true;
         vm.details = {

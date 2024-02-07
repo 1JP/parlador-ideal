@@ -122,7 +122,8 @@
                     .then(response => {
                         this.listPosts();
                         vm.status = false;
-                        this.statusSuccess = true;
+                        vm.statusSuccess = true;
+                        vm.details = {};
                         vm.post = '';
                         vm.number = 280;
                         vm.title = 'Post cadastrado com sucesso';
@@ -130,6 +131,7 @@
                     })
                     .catch(errors => {
                         vm.status = true;
+                        vm.statusSuccess = false;
                         vm.details = {
                             data: errors.response.data.errors
                         }
@@ -156,6 +158,7 @@
                         vm.status = false;
                         this.listPosts();
                         vm.statusSuccess = true;
+                        vm.details = {};
                         vm.title = 'Post atualizado com sucesso';
                         vm.post = '';
                         vm.number = 280;
@@ -163,6 +166,7 @@
                     })
                     .catch(errors => {
                         vm.status = true;
+                        vm.statusSuccess = false;
                         vm.details = {
                             data: errors.response.data.errors
                         }
@@ -181,11 +185,13 @@
                         vm.status = false;
                         this.listPosts();
                         vm.statusSuccess = true;
+                        vm.details = {};
                         vm.title = 'Post excluido com sucesso';
                         $("#modalRemovePost").modal('hide');
                     })
                     .catch(errors => {
                         vm.status = true;
+                        vm.statusSuccess = false;
                         vm.details = {
                             data: errors.response.data.errors
                         }
