@@ -9,6 +9,7 @@ O Parlador Ideal is a web application for _Parlador Ideal_ facilitate the exchan
 Clone the repository from GIT, and then:
 
 ```bash
+cp .env.example .env
 sed -i 's/APP_ENV=local/APP_ENV=ci/g' .env
 composer install --no-progress
 php artisan key:generate
@@ -20,7 +21,7 @@ Install NPM dependencies:
 npm install
 ```
 
-With the DB already created and set on `.evn`, run:
+With the DB already created and set on `.env`, run:
 
 ```bash
 php artisan migrate --seed
@@ -44,6 +45,12 @@ php artisan serve
 
 ```bash
 php artisan test --parallel --coverage --min=15
+```
+
+or
+
+```bash
+php artisan test
 ```
 
 -   To apply the `app.css` changes, run:
