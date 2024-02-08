@@ -12,13 +12,13 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <input-container-component title="E-mail" id="novoEmail" id-help="novoEmailHelp" text-help="">
-                            <input type="email" class="form-control" id="novoEmail" aria-describedby="novoEmailHelp" placeholder="E-mail" v-model="email">
+                        <input-container-component title="E-mail" id="email" id-help="emailHelp" text-help="">
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail" v-model="email">
                         </input-container-component>
                     </div>
                     <div class="form-group">
-                        <input-container-component title="Senha" id="novoSenha" id-help="novoSenhaHelp" text-help="">
-                            <input type="password" class="form-control" id="novoSenha" aria-describedby="novoSenhaHelp" placeholder="Senha" v-model="password">
+                        <input-container-component title="Senha" id="password" id-help="passwordHelp" text-help="">
+                            <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Senha" v-model="password">
                         </input-container-component>
                     </div>
                     <div class="text-center">
@@ -48,29 +48,26 @@
         },
         methods: {
             login(){
-                let vm = this;
-                let data = {};
 
-                if (vm.email == "" || vm.password == "") {
-                    vm.status = true;
-                    vm.details = {
+                if (this.email == "" || this.password == "") {
+                    this.status = true;
+                    this.details = {
                         message: 'E-mail ou senha incorreta!'
                     }
                     return;
                 }
-                data = {
-                    email : vm.email,
-                    password : vm.password,
-                };
                 
-                axios.post(route('login'), data)
+                axios.post(route('login'), {
+                    email : this.email,
+                    password : this.password,
+                })
                     .then(response => {
-                        vm.status = false;
+                        this.status = false;
                         location.reload();
                     })
                     .catch(errors => {
-                        vm.status = true;
-                        vm.details = {
+                        this.status = true;
+                        this.details = {
                             data: errors.response.data.errors
                         }
                     })

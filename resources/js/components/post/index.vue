@@ -48,7 +48,7 @@
         </template>
     </modal-component>
 
-    <Modal id="modalEditPost" title="Editar Post" @onClose="closeModal">
+    <modal-component id="modalEditPost" title="Editar Post" @onClose="closeModal">
         <template v-slot:alert>
             <alert-component type="danger" :details="details" title="Erro ao cadastrar o post" v-if="status"></alert-component>
         </template>
@@ -63,7 +63,7 @@
                 <button type="button" class="btn btn-primary float-right" @click="update()">Editar</button>
             </div>
         </template>
-    </Modal>
+    </modal-component>
 
     <modal-component id="modalRemovePost" title="Deletar Post">
         <template v-slot:body>
@@ -77,15 +77,10 @@
 </template>
 
 <script>
-    import Modal from '../Modal.vue';
-
     export default {
         props: [
             'user'
         ],
-        components: {
-            Modal
-        },
         data(){
             return {
                 post: '',
@@ -106,33 +101,30 @@
                         this.posts = response.data;
                     })
                     .catch(errors => {
-                        //
+                        this.status = true;
+                        this.statusSuccess = false;
+                        this.details = {
+                            data: errors.response.data.errors
+                        }
                     })
             },
 
             save(){
-                let vm = this;
-                let data = {};
-
-                data = {
-                    post : vm.post,
-                };
-                
-                axios.post(route('api.posts.store'), data)
+                axios.post(route('api.posts.store'), { post : this.post })
                     .then(response => {
                         this.listPosts();
-                        vm.status = false;
-                        vm.statusSuccess = true;
-                        vm.details = {};
-                        vm.post = '';
-                        vm.number = 280;
-                        vm.title = 'Post cadastrado com sucesso';
+                        this.status = false;
+                        this.statusSuccess = true;
+                        this.details = {};
+                        this.post = '';
+                        this.number = 280;
+                        this.title = 'Post cadastrado com sucesso';
                         $("#modalNewPost").modal('hide');
                     })
                     .catch(errors => {
-                        vm.status = true;
-                        vm.statusSuccess = false;
-                        vm.details = {
+                        this.status = true;
+                        this.statusSuccess = false;
+                        this.details = {
                             data: errors.response.data.errors
                         }
                     });
@@ -146,28 +138,21 @@
             },
 
             update(){
-                let vm = this;
-                let data = {};
-
-                data = {
-                    post : vm.post,
-                };
-                
-                axios.put(route('api.posts.update', vm.postId), data)
+                axios.put(route('api.posts.update', this.postId), { post : this.post, })
                     .then(response => {
-                        vm.status = false;
+                        this.status = false;
                         this.listPosts();
-                        vm.statusSuccess = true;
-                        vm.details = {};
-                        vm.title = 'Post atualizado com sucesso';
-                        vm.post = '';
-                        vm.number = 280;
+                        this.statusSuccess = true;
+                        this.details = {};
+                        this.title = 'Post atualizado com sucesso';
+                        this.post = '';
+                        this.number = 280;
                         $("#modalEditPost").modal('hide');
                     })
                     .catch(errors => {
-                        vm.status = true;
-                        vm.statusSuccess = false;
-                        vm.details = {
+                        this.status = true;
+                        this.statusSuccess = false;
+                        this.details = {
                             data: errors.response.data.errors
                         }
                     });
@@ -178,37 +163,26 @@
             },
 
             destroy(){
-                let vm = this;
-
-                axios.delete(route('api.posts.destroy', vm.postId))
+                axios.delete(route('api.posts.destroy', this.postId))
                     .then(response => {
-                        vm.status = false;
+                        this.status = false;
                         this.listPosts();
-                        vm.statusSuccess = true;
-                        vm.details = {};
-                        vm.title = 'Post excluido com sucesso';
+                        this.statusSuccess = true;
+                        this.details = {};
+                        this.title = 'Post excluido com sucesso';
                         $("#modalRemovePost").modal('hide');
                     })
                     .catch(errors => {
-                        vm.status = true;
-                        vm.statusSuccess = false;
-                        vm.details = {
+                        this.status = true;
+                        this.statusSuccess = false;
+                        this.details = {
                             data: errors.response.data.errors
                         }
                     });
             },
 
             handleInput() {
-                let length = this.post.length > 0 ? this.post.length : 1;
-
-                this.number = this.number + (this.post.length > this.number ? 1 : -length);
-                if (this.post.length == 0) {
-                    this.number = this.max;
-                }
-
-                if (this.post.length == this.max) {
-                    this.number = 0;
-                }
+                this.number = this.max - this.post.length;
             },
 
             closeModal(){
