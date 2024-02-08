@@ -27,7 +27,7 @@ class PostControllerTest extends TestCase
     {
         $this->post(route('api.posts.store'), [
             'post' => 'This is a post',
-        ])->assertStatus(200);
+        ])->assertStatus(201);
 
         $this->assertDatabaseHas('posts', [
             'post' => 'This is a post',

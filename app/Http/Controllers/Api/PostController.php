@@ -28,7 +28,7 @@ class PostController extends Controller
     {
         $post = Auth::user()->posts()->create($request->validated());
 
-        return response()->json(PostResource::make($post), 200);
+        return response()->json(PostResource::make($post), 201);
         
     }
 

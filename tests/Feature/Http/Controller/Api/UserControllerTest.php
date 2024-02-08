@@ -22,7 +22,7 @@ class UserControllerTest extends TestCase
             'password' => 'Teste@12',
         ]);
         
-        $response->assertStatus(200);
+        $response->assertStatus(201);
 
         $response->assertJsonFragment([
             'name' => $name,
