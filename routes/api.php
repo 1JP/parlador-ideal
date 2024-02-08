@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(static function () {
-    Route::apiResource('posts', PostController::class);
+    Route::apiResource('posts', PostController::class)->only('index', 'store', 'update', 'destroy');
 });
 
-Route::apiResource('usuarios', UserController::class, ['names' => 'users']);
+Route::apiResource('usuarios', UserController::class, ['names' => 'users'])->only('store');
