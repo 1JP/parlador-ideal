@@ -20,7 +20,7 @@
 </head>
 <body class="bg-info">
     <div id="app">
-        @if (Route::currentRouteName() != 'login')
+        @if (Route::currentRouteName() != 'auth.login')
             <nav class="py-2 border-bottom border-light">
                 <div class="d-flex">
                     <div class="p-2 w-100">
@@ -28,15 +28,28 @@
                     </div>
                     <div class="p-2 flex-shrink-1">
                         @if (Auth::user())
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button tabindex="0" class="btn btn-primary m-1 flex flex-row items-center">
-                                    <i class="mr-2" data-lucide="user-circle-2"></i>
-                                    <span class="mr-2">Sair</span>
-                                </button>
-                            </form>
+                            <dropdown-component>
+                                <template v-slot:button>
+                                    {{ Auth::user()->name }}
+                                </template>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <form class="p-2" method="GET" action="{{ route('auth.logout') }}">
+                                        @csrf
+                                        <button class="btn btn-primary w-100">
+                                            Sair
+                                        </button>
+                                    </form>
+                                    @if (Route::currentRouteName() == 'home')
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <a class="dropdown-item" href="{{ route('posts.index') }}">Posts</a></li>
+                                            </li>
+                                        </ul>
+                                    @endif
+                                </div>
+                            </dropdown-component>
                         @else
-                            <a class="btn btn-primary" href="{{ route('login') }}">Login </a>
+                            <a class="btn btn-primary" href="{{ route('auth.login') }}">Login </a>
                         @endif
                     </div>
                 </div>

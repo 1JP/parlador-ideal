@@ -64,7 +64,8 @@
                 })
                     .then(response => {
                         this.status = false;
-                        location.href = route('posts.index');
+                        sessionStorage.setItem('message', 'Cliente cadastrado com sucesso!');
+                        location.href = route('auth.login');
                     })
                     .catch(errors => {
                         this.status = true;
@@ -72,7 +73,7 @@
                             data: errors.response.data.errors
                         }
                     })
-            }
+            },
         }
     }
 </script>
