@@ -19,7 +19,7 @@
                         <input type="password" class="form-control" id="password" required aria-describedby="passwordHelp" placeholder="Senha" name="password">
                     </input-container-component>
                 </div>
-                <div class="text-cente'r">
+                <div class="text-center">
                     <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Logar</button>
                 </div>
             </form>

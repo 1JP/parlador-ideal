@@ -22,6 +22,7 @@ app.component('dropdown-component', require('./components/Dropdown.vue').default
 app.component('modal-component', require('./components/Modal.vue').default);
 
 app.component('login-component', require('./components/login/index.vue').default);
+app.component('reset-password', require('./components/resetPassword/reset.vue').default);
 app.component('user-create', require('./components/users/create.vue').default);
 app.component('post-component', require('./components/post/index.vue').default);
 /**

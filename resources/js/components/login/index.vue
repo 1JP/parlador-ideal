@@ -13,7 +13,14 @@
                 </div>
                 <div class="card-body">
                     <slot/>
+
+                    <div class="form-group">
+                        <p class="pt-2 text-start">
+                            <a :href="addResetPassword">Esqueci minha senha</a>
+                        </p>
+                    </div>
                 </div>
+                
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                     <p class="mb-4 text-sm mx-auto">
                         Não tenho uma conta?
@@ -71,7 +78,9 @@
             addNewClientUrl() {
                 return route('users.create');
             },
-            
+            addResetPassword(){
+                return route('password.reset');
+            }
         }
     }
 </script>
