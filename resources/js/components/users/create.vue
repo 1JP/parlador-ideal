@@ -3,23 +3,23 @@
         <div class="row">
             <alert-component type="danger" :details="details" title="Erro no cadastro" v-if="status"></alert-component>
             <div class="form-group col-md-6">
-                <input-container-component title="Nome" id="novoNome" id-help="novoNomeHelp" text-help="">
-                    <input type="text" class="form-control" id="novoNome" aria-describedby="novoNomeHelp" placeholder="Nome" v-model="name">
+                <input-container-component title="Nome*" id="name" id-help="nameHelp" text-help="">
+                    <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Nome" v-model="name">
                 </input-container-component>
             </div>
             <div class="form-group col-md-6">
-                <input-container-component title="E-mail" id="novoEmail" id-help="novoEmailHelp" text-help="">
-                    <input type="text" class="form-control" id="novoEmail" aria-describedby="novoEmailHelp" placeholder="E-mail" v-model="email">
+                <input-container-component title="E-mail*" id="email" id-help="emailHelp" text-help="">
+                    <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="E-mail" v-model="email">
                 </input-container-component>
             </div>
             <div class="form-group col-md-6">
-                <input-container-component title="Senha" id="novoSenha" id-help="novoSenhaHelp" text-help="">
-                    <input type="password" class="form-control" id="novoSenha" aria-describedby="novoSenhaHelp" placeholder="Senha" v-model="password">
+                <input-container-component title="Senha*" id="password" id-help="passwordHelp" text-help="">
+                    <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Senha" v-model="password">
                 </input-container-component>
             </div>
             <div class="form-group col-md-6">
-                <input-container-component title="Confirmar Senha" id="confirmaSenha" id-help="confirmaSenhaHelp" text-help="">
-                    <input type="password" class="form-control" id="confirmaSenha" aria-describedby="confirmaSenhaHelp" placeholder="Confirmar Senha" v-model="confirm_password">
+                <input-container-component title="Confirmar Senha*" id="confirmPassword" id-help="confirmPasswordHelp" text-help="">
+                    <input type="password" class="form-control" id="confirmPassword" aria-describedby="confirmPasswordHelp" placeholder="Confirmar Senha" v-model="confirm_password">
                 </input-container-component>
             </div>
         </div>
@@ -41,35 +41,39 @@
         },
         methods: {
             create(){
-                let vm = this;
-                let data = {};
-
-                if (vm.password != vm.confirm_password) {
-                    vm.status = true;
-                    vm.details = {
-                        message: 'Senha não são iguais!'
+                if (this.password.length < 8) {
+                    this.status = true;
+                    this.details = {
+                        message: 'A senha precisa ter no mínimo 8 caracteres!'
                     }
                     return;
                 }
 
-                data = {
-                    name : vm.name,
-                    email : vm.email,
-                    password : vm.password,
-                };
+                if (this.password != this.confirm_password) {
+                    this.status = true;
+                    this.details = {
+                        message: 'Senha não são iguais!'
+                    }
+                    return;
+                }
                 
-                axios.post(route('api.users.store'), data)
+                axios.post(route('api.users.store'), {
+                    name : this.name,
+                    email : this.email,
+                    password : this.password,
+                })
                     .then(response => {
-                        vm.status = false;
-                        location.href = route('posts.index');
+                        this.status = false;
+                        sessionStorage.setItem('message', 'Cliente cadastrado com sucesso!');
+                        location.href = route('auth.login');
                     })
                     .catch(errors => {
-                        vm.status = true;
-                        vm.details = {
+                        this.status = true;
+                        this.details = {
                             data: errors.response.data.errors
                         }
                     })
-            }
+            },
         }
     }
 </script>

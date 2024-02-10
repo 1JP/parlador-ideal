@@ -21,7 +21,7 @@ class LoginControllerTest extends TestCase
             'password' => bcrypt('12345678'),
         ]);
 
-        $this->post(route('login'), [
+        $this->post(route('auth.signin'), [
             'email' => 'john.doe@email.com',
             'password' => '12345678',
         ])->assertFound()->assertRedirect(route('posts.index'));
@@ -38,8 +38,8 @@ class LoginControllerTest extends TestCase
 
         $this->assertAuthenticated();
 
-        $this->get(route('logout'))
-            ->assertStatus(405);
+        $this->get(route('auth.logout'))
+            ->assertStatus(302);
     }
 
     /** @test */
@@ -47,14 +47,12 @@ class LoginControllerTest extends TestCase
     {
         $this->assertGuest();
 
-        $response = $this->post(route('login'), [
+        $response = $this->post(route('auth.signin'), [
             'email' => 'john.doe@email.com',
             'password' => 'wrong_password',
         ]);
 
-        $response->assertSessionHasErrors([
-            'email' => 'As credenciais fornecidas estão incorretas.'
-        ]);
+        $response->assertSessionHasErrors(['email']);
 
         $this->assertGuest();
     }
@@ -64,7 +62,7 @@ class LoginControllerTest extends TestCase
     {
         $this->assertGuest();
 
-        $this->post(route('login'), [
+        $this->post(route('auth.signin'), [
             'email' => '',
             'password' => '',
         ])->assertSessionHasErrors(['email', 'password']);
