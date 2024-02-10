@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="container text-center">
-        <login-component>
+        @if(isset($errors) && count($errors) > 0)
+            <login-component :errors="{{ collect($errors->all()) }}">
+        @else
+            <login-component>
+        @endif
             <form method="POST" action="{{ route('auth.signin') }}">
                 @csrf
                 <div class="form-group">

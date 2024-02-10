@@ -26,8 +26,13 @@
 </template>
 
 <script>
-
     export default {
+        props: {
+            errors: {
+                type: Object,
+                default: () => [],
+            }
+        },
         data() {
             return {
                 email: '',
@@ -40,6 +45,7 @@
         },
         mounted() {
             this.message();
+            this.computedErrors();
         },
         methods: {
             message(){
@@ -49,12 +55,23 @@
                     this.statusSuccess = true;
                 }
                 sessionStorage.removeItem('message');
+            },
+            computedErrors()
+            {
+                if (this.errors.length > 0) {
+                    this.status = true;
+                    this.statusSuccess = false;
+                    this.details = {
+                        message: this.errors[0]
+                    }
+                }
             }
         },
         computed: {
             addNewClientUrl() {
                 return route('users.create');
             },
+            
         }
     }
 </script>
