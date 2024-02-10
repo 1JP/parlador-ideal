@@ -16,8 +16,6 @@ class UserController extends Controller
     {
         $user = User::create($request->validated());
 
-        Auth::login($user);
-
-        return response()->json($user, 200);
+        return response()->json($user, 201);
     }
 }

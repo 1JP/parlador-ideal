@@ -16,4 +16,12 @@ class UserObserver
     {
         $user->password = bcrypt($user->password);
     }
+
+    /**
+     * Handle the User "updated" event.
+     */
+    public function updated(User $user): void
+    {
+        $user->password = bcrypt($user->password);
+    }
 }

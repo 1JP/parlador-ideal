@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "parlador/ideal",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "facilitates the exchange of libertarian ideas of the group in question",
+    "keywords": ["parlador", "ideal"],
     "license": "MIT",
     "require": {
         "php": "^8.1",

@@ -3,7 +3,8 @@
 return [
     'only' => [
         'users.*',
-        'login',
+        'auth.*',
+        'password.*',
         'home',
         'posts.*',
         'api.users.*',

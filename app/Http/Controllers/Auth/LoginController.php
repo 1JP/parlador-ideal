@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class LoginController extends Controller
 {
@@ -43,6 +45,14 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * Create a login view.
+     */
+    public function create(): View|Factory
+    {
+        return view('auth.login');
+    }
+
     protected function sendFailedLoginResponse(Request $request): RedirectResponse
     {
         // Custom message for invalid password
@@ -57,7 +67,7 @@ class LoginController extends Controller
      * @throws BindingResolutionException
      * @throws RouteNotFoundException
      */
-    public function store(SignInRequest $request): RedirectResponse
+    public function store(SignInRequest $request)
     {
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -67,13 +77,13 @@ class LoginController extends Controller
 
             return $this->sendLockoutResponse($request);
         }
-
+        
         if ($this->attemptLogin($request)) {
             session()->put('validation', Crypt::encrypt($request->password));
 
             return $this->sendLoginResponse($request);
         }
-
+        
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
@@ -93,6 +103,16 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('login');
+        return redirect()->route('auth.login');
+    }
+
+    /**
+     * * The username string to use for authentication.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'email';
     }
 }

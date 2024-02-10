@@ -10,7 +10,6 @@ Clone the repository from GIT, and then:
 
 ```bash
 cp .env.example .env
-sed -i 's/APP_ENV=local/APP_ENV=ci/g' .env
 composer install --no-progress
 php artisan key:generate
 ```
@@ -44,22 +43,11 @@ php artisan serve
 -   To run PHP tests
 
 ```bash
-php artisan test --parallel --coverage --min=15
-```
-
-or
-
-```bash
 php artisan test
 ```
 
 -   To apply the `app.css` changes, run:
 
-```bash
-npm run css:watch
-```
-
-to watch css changes:
 ```bash
 npm run watch
 ```
